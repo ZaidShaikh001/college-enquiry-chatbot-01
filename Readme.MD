@@ -11,11 +11,11 @@ All features :
 - Course details & syllabus
 - Ask about holidays
 
-
 ## Tech Stack
+
 - **database** - sqlite3
-- **server** - python & flask   
-- **frontend** - html,css,js  
+- **server** - python & flask
+- **frontend** - html,css,js
 - **neural network** - python & pytorch
 - **natural language processing** - spacy & nltk
 
@@ -60,14 +60,18 @@ I used `pip install nltk spacy flask` to install them together. Then I use `pyth
 -- requirement.txt (stores the name & versions of the libraries used)
 ```
 
+### Go to [Instructions.md](./Instructions.md) to know how to use this repo
+
 ## Screenshots
 
 ### Home Page
+
 ![Home Page](./assets/Chatbot.png)
 ![Home Page2](./assets/Chatbot2.png)
 ![Home Page3](./assets/Chatbot3.png)
 
 ### Admin Pages
+
 ![Admin-Teachers](./assets/Admin-Teachers.png)
 ![Admin-Students](./assets/Admin-Students.png)
 ![Admin-Courses](./assets/Admin-Courses.png)

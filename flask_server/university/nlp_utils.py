@@ -1,16 +1,22 @@
-import nltk
-# nltk.download('punkt')
-from nltk.stem.porter import PorterStemmer
+from .models import Course
 import numpy as np
-from flask_server.university.models import Course
+from nltk.stem.porter import PorterStemmer
+import spacy
+from spacy.matcher import Matcher
+import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
 
-stemmer=PorterStemmer()
- 
+stemmer = PorterStemmer()
+
+
 def tokenize(sentence):
     return nltk.word_tokenize(sentence)
 
+
 def stem(word):
     return stemmer.stem(word.lower())
+
 
 def bag_of_words(tokenized_sentence, words):
     """
@@ -26,33 +32,33 @@ def bag_of_words(tokenized_sentence, words):
     # initialize bag with 0 for each word
     bag = np.zeros(len(words), dtype=np.float32)
     for idx, w in enumerate(words):
-        if w in sentence_words: 
+        if w in sentence_words:
             bag[idx] = 1
 
     return bag
 
 
-import spacy 
 nlp = spacy.load("en_core_web_sm")
-from spacy.matcher import Matcher
 
 
-matcher=Matcher(nlp.vocab)
+matcher = Matcher(nlp.vocab)
 
-courses=Course.query.all()
+# courses = Course.query.all()
 
-for course in courses:
-    pattern = [{"LOWER":course.name.lower()}]
-    matcher.add(course.name,[pattern])
+# for course in courses:
+#     pattern = [{"LOWER": course.name.lower()}]
+#     matcher.add(course.name, [pattern])
 
 btech_pattern = [
-    [{"LOWER":"b."},{"LOWER":"tech"}],
-    [{"LOWER":"b"},{"LOWER":"tech"}],
-    [{"LOWER":"btech"}]
+    [{"LOWER": "b."}, {"LOWER": "tech"}],
+    [{"LOWER": "b"}, {"LOWER": "tech"}],
+    [{"LOWER": "btech"}]
 ]
 
-matcher.add("mtech",[[{"LOWER":"mtech"}],[{"LOWER":"m","OP":"+"},{"LOWER":"tech"}]])
-matcher.add("btech",btech_pattern)
+matcher.add("mtech", [[{"LOWER": "mtech"}], [
+            {"LOWER": "m", "OP": "+"}, {"LOWER": "tech"}]])
+matcher.add("btech", btech_pattern)
+
 
 def course_matcher(sentence):
     doc = nlp(sentence)
@@ -61,7 +67,3 @@ def course_matcher(sentence):
     for match_id, start, end in matches:
         string_id = nlp.vocab.strings[match_id]  # 'mtech or btech'
         return string_id
-
-
-
-
