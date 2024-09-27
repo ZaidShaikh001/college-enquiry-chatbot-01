@@ -21,6 +21,9 @@ All features :
 
 ## Getting started
 
+Go to [Instructions.md](./Instructions.md) to know how to use this repo.
+Watch the [Instructions](./instructions.mp4) here.
+
 First create a virtual environment using `virtualenv venv` command in **terminal/cmd prompt/powershell**. Then activate it. Now we can install our dependencies for this project inside this isolated virtual environment.
 
 We will install the following libraries to get started :
@@ -59,8 +62,6 @@ I used `pip install nltk spacy flask` to install them together. Then I use `pyth
 -- intents.json (dataset for training)
 -- requirement.txt (stores the name & versions of the libraries used)
 ```
-
-### Go to [Instructions.md](./Instructions.md) to know how to use this repo
 
 ## Screenshots
 
